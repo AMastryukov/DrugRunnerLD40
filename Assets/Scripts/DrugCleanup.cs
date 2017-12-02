@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScrollingBackground : MonoBehaviour {
-
-	private Rigidbody2D rb2d;
+public class DrugCleanup : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		rb2d = GetComponent<Rigidbody2D> ();
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		rb2d.velocity = new Vector2(GameControl.instance.scrollSpeed, 0);
+		if (transform.position.x < -12f) {
+			Destroy (gameObject);
+		}
 	}
 }
