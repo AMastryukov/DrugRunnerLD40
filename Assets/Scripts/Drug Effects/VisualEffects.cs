@@ -60,8 +60,8 @@ public class VisualEffects : MonoBehaviour {
 			ChromaticAberrationModel.Settings caSettings = profile.chromaticAberration.settings;
 			GrainModel.Settings gSettings = profile.grain.settings;
 
-			caSettings.intensity = player.GetComponent<MushroomEffect>().intoxication / 50f;
-			gSettings.intensity = player.GetComponent<MushroomEffect>().intoxication / 100f;
+			caSettings.intensity = player.GetComponent<MushroomEffect>().intoxication / 30f;
+			gSettings.intensity = player.GetComponent<MushroomEffect>().intoxication / 60f;
 
 			profile.chromaticAberration.settings = caSettings;
 			profile.grain.settings = gSettings;

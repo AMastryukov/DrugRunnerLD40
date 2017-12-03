@@ -16,11 +16,11 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (alive) {
-			if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.UpArrow)) {
+			if (Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.UpArrow)) {
 				player.AddForce (new Vector3 (0, steerForce + GetComponent<CocaineEffect> ().intoxication / 100f - GetComponent<WeedEffect> ().intoxication / 100f, 0));
 			}
 
-			if (Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.DownArrow)) {
+			if (Input.GetKey (KeyCode.D) || Input.GetKey (KeyCode.DownArrow)) {
 				player.AddForce (new Vector3 (0, -(steerForce) - GetComponent<CocaineEffect> ().intoxication / 100f + GetComponent<WeedEffect> ().intoxication / 100f, 0));
 			}
 

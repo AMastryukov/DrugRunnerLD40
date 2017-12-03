@@ -24,10 +24,10 @@ public class DrugPickup : MonoBehaviour {
 				other.gameObject.GetComponent<CocaineEffect> ().intoxication += 20;
 
 				// move the player back a little bit
-				other.GetComponent<Rigidbody>().AddForce(new Vector3(225, 0, 0));
+				other.GetComponent<Rigidbody>().AddForce(new Vector3(250, 0, 0));
 
 				// increase scrolling speed
-				GameControl.instance.scrollSpeed += 1.5f;
+				GameControl.instance.scrollSpeed += 1.0f;
 			}
 
 			if (gameObject.tag == "Mushroom") {
