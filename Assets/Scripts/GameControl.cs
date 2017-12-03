@@ -53,6 +53,13 @@ public class GameControl : MonoBehaviour {
 			Debug.Log ("You crashed going at " + (GameControl.instance.scrollSpeed * 4).ToString() + " km/h.");
 
 			crashedCar = true;
+
+			// turn off the drug effects
+			player.GetComponent<BeerEffect> ().intoxication = 0;
+			player.GetComponent<WeedEffect> ().intoxication = 0;
+			player.GetComponent<CocaineEffect> ().intoxication = 0;
+			player.GetComponent<MushroomEffect> ().intoxication = 0;
+
 			player.GetComponent<PlayerMovement> ().alive = false;
 		}
 
