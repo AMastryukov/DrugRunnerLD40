@@ -30,6 +30,10 @@ public class DrugPickup : MonoBehaviour {
 				GameControl.instance.scrollSpeed += 1.5f;
 			}
 
+			if (gameObject.tag == "Mushroom") {
+				other.gameObject.GetComponent<MushroomEffect> ().intoxication += 20;
+			}
+
 			Destroy (gameObject);
 		}
 	}
