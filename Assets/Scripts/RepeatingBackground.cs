@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class RepeatingBackground : MonoBehaviour {
 
-	private BoxCollider2D groundCollider;
+	private BoxCollider groundCollider;
 	private float groundHorizontalLength;
 
 	// Use this for initialization
 	void Start () {
-		groundCollider = GetComponent<BoxCollider2D> ();
+		groundCollider = GetComponent<BoxCollider> ();
 		groundHorizontalLength = groundCollider.size.x;
 	}
 	
@@ -22,7 +22,7 @@ public class RepeatingBackground : MonoBehaviour {
 
 	private void RepositionBackground()
 	{
-		Vector2 groundOffset = new Vector2 (groundHorizontalLength * 2f, 0);
-		transform.position = (Vector2)transform.position + groundOffset;
+		Vector3 groundOffset = new Vector3 (groundHorizontalLength * 3f, 0, 0);
+		transform.position = (Vector3)transform.position + groundOffset;
 	}
 }

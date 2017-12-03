@@ -1,16 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PostProcessing;
 
 public class BeerEffect : MonoBehaviour {
 
-	public Rigidbody2D player;
+	public Rigidbody player;
 	public int intoxication = 0;
 
 	// Use this for initialization
 	void Start () {
-		StartCoroutine (DrunkSteer());
 		StartCoroutine (SoberUp ());
 	}
 	
@@ -23,15 +21,9 @@ public class BeerEffect : MonoBehaviour {
 		if (intoxication < 0) {
 			intoxication = 0;
 		}
-	}
 
-	IEnumerator DrunkSteer() {
-		while (true) {
-			Vector2 drunkForce = new Vector2 (0, Random.Range (-(intoxication / 1.5f), intoxication / 1.5f) + player.velocity.y * intoxication / 1.5f);
-			player.AddForce (drunkForce);
-
-			yield return new WaitForSeconds (0.1f);
-		}
+		Vector2 drunkForce = new Vector3 (0, Mathf.Sign(player.velocity.y) * Random.Range(intoxication / 5f, intoxication / 3f), 0);
+		player.AddForce (drunkForce);
 	}
 
 	IEnumerator SoberUp() {

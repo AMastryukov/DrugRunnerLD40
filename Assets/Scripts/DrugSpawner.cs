@@ -31,7 +31,7 @@ public class DrugSpawner : MonoBehaviour {
 	// 'roll the die' to decide whether to spawn drug or not
 	IEnumerator SpawnRoll() {
 		while (true) {
-			yield return new WaitForSeconds (1.5f / GameControl.instance.scrollSpeed);
+			yield return new WaitForSeconds (3f / GameControl.instance.scrollSpeed);
 
 			if (Random.Range (1, 100) < 50) {
 				SpawnDrug ();
@@ -40,7 +40,7 @@ public class DrugSpawner : MonoBehaviour {
 	}
 
 	private void SpawnDrug() {
-		Vector3 spawnVector = new Vector3 (10, Random.Range (0.0f, 8.0f) - 4.0f, -1);
+		Vector3 spawnVector = new Vector3 (22, Random.Range (-3.5f, 3.5f), -0.3f);
 		Transform drug = Instantiate (drugs[Random.Range(0,4)], spawnVector, Quaternion.identity);
 		drug.transform.parent = parent;
 	}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DrugPickup : MonoBehaviour {
 
-	void OnTriggerEnter2D(Collider2D other) {
+	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.name == "Player") {
 			if (gameObject.tag == "Beer") {
 				other.gameObject.GetComponent<BeerEffect> ().intoxication += 20;
@@ -14,20 +14,20 @@ public class DrugPickup : MonoBehaviour {
 				other.gameObject.GetComponent<WeedEffect> ().intoxication += 20;
 
 				// move the player back a little bit
-				other.GetComponent<Rigidbody2D>().AddForce(new Vector2(-100, 0));
+				other.GetComponent<Rigidbody>().AddForce(new Vector3(-100, 0, 0));
 
 				// slow down scrolling speed a little bit
-				GameControl.instance.scrollSpeed -= 0.5f;
+				GameControl.instance.scrollSpeed -= 0.75f;
 			}
 
 			if (gameObject.tag == "Cocaine") {
 				other.gameObject.GetComponent<CocaineEffect> ().intoxication += 20;
 
 				// move the player back a little bit
-				other.GetComponent<Rigidbody2D>().AddForce(new Vector2(150, 0));
+				other.GetComponent<Rigidbody>().AddForce(new Vector3(225, 0, 0));
 
 				// increase scrolling speed
-				GameControl.instance.scrollSpeed += 0.75f;
+				GameControl.instance.scrollSpeed += 1.5f;
 			}
 
 			Destroy (gameObject);

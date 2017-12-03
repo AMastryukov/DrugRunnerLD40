@@ -7,7 +7,9 @@ public class GameControl : MonoBehaviour {
 	public static GameControl instance;
 	public float scrollSpeed;
 	public GameObject player;
+
 	public bool gameOver = false;
+	public bool crashedCar = false;
 
 	void Awake() 
 	{
@@ -25,7 +27,9 @@ public class GameControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (crashedCar) {
+			player.GetComponent<Rigidbody>().velocity = new Vector3(-(GameControl.instance.scrollSpeed), 0, 0);
+		}
 	}
 
 	public void LoseGame(string cause) {
@@ -33,26 +37,27 @@ public class GameControl : MonoBehaviour {
 			if (cause == "Cocaine") {
 				Debug.Log ("You died at the wheel due to a cocaine overdose.");
 
-				StartCoroutine (CrashCar());
-				player.GetComponent<PlayerMovement> ().enabled = false;
+				player.GetComponent<PlayerMovement> ().alive = false;
+				StartCoroutine (DeadSteer ());
 			}
 
 			if (cause == "Beer") {
 				Debug.Log ("You died at the wheel due to severe alcohol poisoning.");
 
-				StartCoroutine (CrashCar());
-				player.GetComponent<PlayerMovement> ().enabled = false;
+				player.GetComponent<PlayerMovement> ().alive = false;
+				StartCoroutine (DeadSteer ());
 			}
-
-			if (cause == "Crash") {
-				Debug.Log ("You crashed going at " + (GameControl.instance.scrollSpeed * 5).ToString() + " km/h.");
-
-				player.GetComponent<PlayerMovement> ().enabled = false;
-			}
-
-			GetComponent<DrugSpawner> ().enabled = false;
-			gameOver = true;
 		}
+
+		if (cause == "Crash") {
+			Debug.Log ("You crashed going at " + (GameControl.instance.scrollSpeed * 4).ToString() + " km/h.");
+
+			crashedCar = true;
+			player.GetComponent<PlayerMovement> ().alive = false;
+		}
+
+		GetComponent<DrugSpawner> ().enabled = false;
+		gameOver = true;
 	}
 
 	public void WinGame(string winText) {
@@ -64,11 +69,11 @@ public class GameControl : MonoBehaviour {
 		}
 	}
 
-	IEnumerator CrashCar() {
-		while (true) {
-			player.GetComponent<Rigidbody2D> ().AddForce(player.GetComponent<Rigidbody2D> ().velocity * 25f);
+	IEnumerator DeadSteer() {
+		while (!crashedCar) {
+			player.GetComponent<Rigidbody> ().AddForce (new Vector3(0, Mathf.Sign(player.GetComponent<Rigidbody>().velocity.y) * 65f, 0));
 
-			yield return new WaitForSeconds (0.1f);
+			yield return new WaitForSeconds (0.05f);
 		}
 	}
 }
