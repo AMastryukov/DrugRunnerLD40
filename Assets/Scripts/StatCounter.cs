@@ -21,7 +21,6 @@ public class StatCounter : MonoBehaviour {
 			yield return new WaitForSeconds (1);
 
 			timeElapsed += 1;
-			Debug.Log (timeElapsed);
 		}
 	}
 }

@@ -13,6 +13,6 @@ public class ScrollingBackground : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		rb2d.velocity = new Vector2(GameControl.instance.scrollSpeed, 0);
+		rb2d.velocity = new Vector2(-(GameControl.instance.scrollSpeed), 0);
 	}
 }

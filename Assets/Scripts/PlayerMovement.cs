@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 
 	private Rigidbody2D rb2d;
+	public int steerForce;
 
 	// Use this for initialization
 	void Start () {
@@ -14,11 +15,11 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.UpArrow)) {
-			rb2d.AddForce (new Vector2(0,18));
+			rb2d.AddForce (new Vector2(0, steerForce));
 		}
 
 		if (Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.DownArrow)) {
-			rb2d.AddForce (new Vector2(0,-18));
+			rb2d.AddForce (new Vector2(0, -(steerForce)));
 		}
 	}
 }
