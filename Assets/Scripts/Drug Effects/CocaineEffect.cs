@@ -1,37 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PostProcessing;
 
-public class BeerEffect : MonoBehaviour {
+public class CocaineEffect : MonoBehaviour {
 
 	public Rigidbody2D player;
 	public int intoxication = 0;
 
+	private int defaultSteerForce;
+
 	// Use this for initialization
 	void Start () {
-		StartCoroutine (DrunkSteer());
 		StartCoroutine (SoberUp ());
+		defaultSteerForce = player.GetComponent<PlayerMovement> ().steerForce;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (intoxication > 100) {
-			GameControl.instance.LoseGame ("Beer");
+			GameControl.instance.LoseGame ("Cocaine");
+			intoxication = 100;
 		}
 
 		if (intoxication < 0) {
 			intoxication = 0;
 		}
-	}
 
-	IEnumerator DrunkSteer() {
-		while (true) {
-			Vector2 drunkForce = new Vector2 (0, Random.Range (-(intoxication / 1.5f), intoxication / 1.5f) + player.velocity.y * intoxication / 1.5f);
-			player.AddForce (drunkForce);
-
-			yield return new WaitForSeconds (0.1f);
-		}
+		// increase the player's steering force
+		player.GetComponent<PlayerMovement> ().steerForce = defaultSteerForce + defaultSteerForce * intoxication / 100;
 	}
 
 	IEnumerator SoberUp() {
